@@ -8,6 +8,8 @@ Este repositório foi criado como parte de uma mentoria de DevOps/SRE com foco e
 
 - Git e GitHub
 - Python
+- Docker
+- Kubernetes
 
 ## Estrutura do repositório
 ```
