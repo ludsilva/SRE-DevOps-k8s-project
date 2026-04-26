@@ -1,0 +1,25 @@
+replicaCount: 3
+
+image:
+  repository: ludsilva/app-python-distroless
+  tag: "1.1"
+
+namespace: dev
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 5000
+  nodePort: 30800
+
+resources:
+  limits:
+    memory: "64Mi"
+    cpu: "50m"
+  requests:
+    memory: "32Mi"
+    cpu: "25m"
+
+probes: 
+  path: /health
+  initialDelaySeconds: 15

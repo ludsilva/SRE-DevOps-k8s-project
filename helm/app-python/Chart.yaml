@@ -1,0 +1,5 @@
+apiVersion: v2
+name: app-python
+description: Este é um chart da app python, construida de exemplo para a mentoria SRE/DevOps
+version: 0.1.0
+appVersion: 1.0.0
