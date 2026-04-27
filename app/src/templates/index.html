@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Task API</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="bg-gray-900 text-white">
+
+  <!-- Nav -->
+  <nav class="bg-gray-800 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      
+      <div class="text-lg font-bold">
+        🚀 Task Manager
+      </div>
+
+      <div class="flex gap-4 text-sm">
+        <a href="/" class="hover:text-blue-400">Tasks</a>
+        <a href="/health" target="_blank" class="hover:text-green-400">Health</a>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Conteúdo -->
+  <div class="max-w-2xl mx-auto mt-10 p-6 bg-gray-800 rounded-xl shadow-lg">
+    
+    <h1 class="text-2xl font-bold mb-6 text-center">
+      Task Manager
+    </h1>
+
+    <!-- Criar tarefa -->
+    <div class="flex gap-2 mb-6">
+      <input 
+        id="taskInput"
+        type="text"
+        placeholder="Nova tarefa..."
+        class="flex-1 p-2 rounded bg-gray-700 text-white outline-none"
+      >
+      <button 
+        onclick="createTask()"
+        class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600"
+      >
+        Criar
+      </button>
+    </div>
+
+    <!-- Lista -->
+    <ul id="taskList" class="space-y-2"></ul>
+
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

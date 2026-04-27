@@ -1,7 +1,8 @@
-from flask import jsonify, request
+from flask import jsonify, request, render_template
 from storage import create_task, list_tasks, complete_task
 from metrics import REQUEST_COUNT
 from prometheus_client import generate_latest
+
 import time
 
 def register_routes(app):
@@ -12,7 +13,7 @@ def register_routes(app):
 
     @app.route("/")
     def home():
-        return jsonify({"message": "Task API running"}), 200
+        return render_template("index.html")
 
     @app.route("/health")
     def health():
@@ -38,18 +39,18 @@ def register_routes(app):
             return jsonify({"error": "Task not found"}), 404
         return jsonify(task), 200
 
-    # 🔥 endpoint pra simular erro (SRE testing)
+    # endpoint pra simular erro
     @app.route("/fail")
     def fail():
         return jsonify({"error": "simulated failure"}), 500
 
-    # 🐢 endpoint lento (latência)
+    # latência
     @app.route("/slow")
     def slow():
         time.sleep(3)
         return jsonify({"message": "slow response"}), 200
 
-    # 📊 métricas
+    # métricas
     @app.route("/metrics")
     def metrics():
         return generate_latest(), 200
