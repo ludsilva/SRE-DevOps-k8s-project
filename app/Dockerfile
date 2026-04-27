@@ -14,6 +14,6 @@ WORKDIR /app
 ENV PYTHONUNBUFFERED=1
 ENV PATH="/app/venv/bin:$PATH"
 COPY --from=build /app/venv /app/venv
-COPY src/script.py .
+COPY src/ .
 EXPOSE 5000
 ENTRYPOINT ["python", "/app/script.py"]

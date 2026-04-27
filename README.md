@@ -13,9 +13,17 @@ Este repositório foi criado como parte de uma mentoria de DevOps/SRE com foco e
 - KIND (para testes locais)
 
 ## Estrutura do repositório
+
 ```
-├── script.py
-├── README.md
+├── src/
+│   └── script.py
+├── k8s/
+│   ├── deployment.yaml
+|   ├── namespace.yaml
+│   └── service.yaml
+├── Dockerfile
+├── kind-config.yaml
+└── README.md
 ```
 
 ## Arquitetura atual
@@ -93,10 +101,10 @@ kubectl config set-context --current --namespace=dev
 ## Próximos passos (desafios)
 
 * Evoluir a aplicação (opcional);
-* Implementar HPA, PDB
-* Utilizar Helm
-* GitOps com Argo
-* Adicionar observabilidade (logs e métricas)
+* Implementar HPA, PDB, pod anti affinity (conforme necessidade);
+* Utilizar Helm;
+* GitOps com Argo;
+* Adicionar observabilidade (logs e métricas).
 
 
 ## Licença

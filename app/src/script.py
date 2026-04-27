@@ -1,16 +1,12 @@
-from flask import Flask, jsonify
-app = Flask(__name__)
+from flask import Flask
+from routes import register_routes
 
-@app.route("/")
-def hello_wolrd():
-  return "<h2>Hello world!</h2>"
+def create_app():
+    app = Flask(__name__)
+    register_routes(app)
+    return app
 
-@app.route("/health")
-def health_check():
-    return jsonify({"status": "ok"}), 200
+app = create_app()
 
-def not_found(error):
-    return jsonify({"error": "Route not found"}), 404
- 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

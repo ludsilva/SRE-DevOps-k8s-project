@@ -1,4 +1,7 @@
+## Kind
 kind-config.yaml
 
 ## Cosign 
 cosign.key
+
+.vscode
