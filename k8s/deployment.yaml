@@ -24,7 +24,10 @@ spec:
     spec:
       containers:
       - name: app-python
-        image: ludsilva/app-python-distroless:1.1
+        image: ludsilva/app-python-distroless:1.4
+        env:
+        - name: REDIS_HOST
+          value: "redis-svc"
         ports:
         - containerPort: 5000
           name: "app-port"
