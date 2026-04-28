@@ -7,32 +7,50 @@ Este repositório foi criado como parte de uma mentoria de DevOps/SRE com foco e
 ## Tecnologias utilizadas
 
 - Git e GitHub
-- Python
+- Python (Flask) e Redis
 - Docker
 - Kubernetes
-- KIND (para testes locais)
+- KIND (ambiente de testes locais)
+- Helm
 
 ## Estrutura do repositório
-
 ```
-├── src/
-│   └── script.py
+├── app/
+│   ├── src/
+│   │   ├── app.py
+│   │   ├── routes.py
+│   │   ├── storage.py
+│   │   └── metrics.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── README.md
+│
 ├── k8s/
-│   ├── deployment.yaml
-|   ├── namespace.yaml
-│   └── service.yaml
-├── Dockerfile
+│   ├── namespace.yaml
+│   ├── app-deployment.yaml
+│   ├── app-service.yaml
+│   ├── redis-deployment.yaml
+│   └── redis-service.yaml
+│
+├── helm/
+│   └── app-python/
+│       ├── templates/
+│       ├── Chart.yaml
+│       └── values.yaml
+│
 ├── kind-config.yaml
+├── cosign.pub
+├── LICENSE
 └── README.md
 ```
 
 ## Arquitetura atual
 O projeto consiste em:
 
-- Uma aplicação python simples com Flask;
+- Uma aplicação com frontend, API REST em Flask e persistência com Redis;
 - Containerização com Docker, imagem distroless (chainguard) com multi-stage;
 - Deploy em Kubernetes;
-- Exposição via Service do tipo NodePort (o cluster local foi criado utilizando o KIND com configuração customizada para expor portas no host)
+- Gerenciamento de releases com Helm
 
 ## Como utilizar este projeto
 1. Clone o repositório para sua máquina local:
@@ -68,45 +86,32 @@ nodes:
 - role: worker
 ```
 
-4. Deploy da aplicação
+4. Deploy da aplicação com Helm
 ```bash
-kubectl apply -f k8s/
+cd helm/app-python 
+helm upgrade --install app-python . -n dev --create-namespace
 ```
 
 5. Acessar à aplicação via localhost:
 ```bash
 http://localhost:8080
 ```
-6. (opcional) Setar o namespace como current
 
+Via NodePort:
 ```bash
-kubectl config set-context --current --namespace=dev
+http://localhost:30800
 ```
 
-### Validações realizadas
-
-* Deployment criado com sucesso
-* Pods em estado Running
-* Healthchecks configurados (`/health`)
-* Service funcionando corretamente
-* Aplicação acessível via navegador/curl
-
 ## Observações importantes
-
-* O NodePort no KIND não é exposto automaticamente no host
-* Foi necessário mapear a porta manualmente via `extraPortMappings`
-* Para ambientes reais, o ideal seria utilizar **Ingress Controller**
+- O NodePort no KIND não é exposto automaticamente no host. Foi necessário mapear a porta manualmente via `extraPortMappings`
+- Para ambientes reais, o ideal seria utilizar **Ingress Controller**
 
 
 ## Próximos passos (desafios)
-
-* Evoluir a aplicação (opcional);
-* Implementar HPA, PDB, pod anti affinity (conforme necessidade);
-* Utilizar Helm;
-* GitOps com Argo;
-* Adicionar observabilidade (logs e métricas).
+- Implementar HPA e PDB;
+- Evoluir observabilidade (Prometheus + Grafana);
+- Implementar GitOps com ArgoCD.
 
 
 ## Licença
-
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](./LICENSE) para mais detalhes.
