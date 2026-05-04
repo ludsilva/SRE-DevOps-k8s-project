@@ -5,3 +5,6 @@ kind-config.yaml
 cosign.key
 
 .vscode
+
+# Manifest
+./k8s/namespace.yaml

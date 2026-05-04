@@ -50,7 +50,7 @@ O projeto consiste em:
 - Uma aplicação com frontend, API REST em Flask e persistência com Redis;
 - Containerização com Docker, imagem distroless (chainguard) com multi-stage;
 - Deploy em Kubernetes;
-- Gerenciamento de releases com Helm
+- Exposição via Service do tipo NodePort (o cluster local foi criado utilizando o KIND com configuração customizada para expor portas no host)
 
 ## Como utilizar este projeto
 1. Clone o repositório para sua máquina local:

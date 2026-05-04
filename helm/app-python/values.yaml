@@ -1,5 +1,5 @@
 app:
-  replicaCount: 3
+  replicaCount: 4
   image:
     repository: ludsilva/app-python-distroless
     tag: "1.4"
